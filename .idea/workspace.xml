@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee227925-2a0e-4bba-a251-85fa854d744b" name="Default Changelist" comment="ignore">
-      <change afterPath="$PROJECT_DIR$/models/author.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/authors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/authors/_form_fields.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/authors/index.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/authors/new.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/partials/errMessage.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/partials/header.ejs" afterDir="false" />
+    <list default="true" id="ee227925-2a0e-4bba-a251-85fa854d744b" name="Default Changelist" comment=" Book create Merge remote-tracking branch 'origin/master'">
+      <change afterPath="$PROJECT_DIR$/models/book.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/bookCovers/00fb42a511dd9d18b7d4ecbac4592b3f" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/bookCovers/40392dcaf174eead82036d74f9c3c77e" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/bookCovers/4264607e000a2f97725812af974ba208" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/bookCovers/6c89d2e9a9883dce87963e113ac64e71" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/bookCovers/7173ebb7d3be44cb9d8e6ed9a2ea4d7a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/bookCovers/836721772c4aa2c82aae5be22a6c0b5b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploads/bookCovers/f1f2593e969436299001d67407c6e037" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/books.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/books/_form_fields.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/books/index.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/books/new.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/partials/errorMessage.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/author.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/author.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/authors.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/authors/_form_fields.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/authors/_form_fields.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/authors/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/authors/index.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/authors/new.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/authors/new.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/layouts/layout.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/layout.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/errMessage.ejs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +56,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -48,10 +65,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="12.19.0" />
     <property name="javascript.nodejs.core.library.typings.version" value="12.19.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/views/books" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tarek\WebstormProjects\server\views\books" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -81,7 +104,8 @@
       <workItem from="1606923398151" duration="2474000" />
       <workItem from="1606925896597" duration="3249000" />
       <workItem from="1606929181304" duration="3663000" />
-      <workItem from="1607005358646" duration="4190000" />
+      <workItem from="1607005358646" duration="5234000" />
+      <workItem from="1607098022216" duration="8754000" />
     </task>
     <task id="LOCAL-00001" summary="done">
       <created>1606928024980</created>
@@ -97,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606928141995</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ignore">
+      <created>1607009731429</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1607009731429</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,9 +147,12 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="done" />
+    <MESSAGE value="Initial Author Router" />
     <MESSAGE value="ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="ignore" />
+    <MESSAGE value=" Book create Merge remote-tracking branch 'origin/master'" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Book create Merge remote-tracking branch 'origin/master'" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
