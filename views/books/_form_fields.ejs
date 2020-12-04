@@ -8,13 +8,13 @@
   <label>Author</label>
   <label>
     <select name="author">
-    <% authors.forEach(author => { %>
-      <% if (author.id === book.author) { %>
+      <% authors.forEach(author => { %>
+        <% if (author.id === book.author) { %>
         <option selected label="<%= author.name %>" value="<%= author.id %>">
-      <% } else { %>
-        <option label="<%= author.name %>" value="<%= author.id %>">
-      <% } %>
-    <% }) %>
+          <% } else { %>
+      <option label="<%= author.name %>" value="<%= author.id %>">
+        <% } %>
+        <% }) %>
     </select>
   </label>
 </div>
@@ -22,7 +22,7 @@
   <label>Publish Date</label>
   <label>
     <input type="date" name="publishDate"
-          value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">
+           value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">
   </label>
 </div>
 <div>
@@ -34,7 +34,7 @@
 
 <div>
   <label>Cover</label>
-  <input type="file" name="cover">
+  <input type="file" name="cover" class="filepond">
 </div>
 <div>
   <label>Description</label>
