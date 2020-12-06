@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee227925-2a0e-4bba-a251-85fa854d744b" name="Default Changelist" comment=" Book create Merge remote-tracking branch 'origin/master'">
-      <change afterPath="$PROJECT_DIR$/public/javascprits/fileUpload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/server.iml" afterDir="false" />
+    <list default="true" id="ee227925-2a0e-4bba-a251-85fa854d744b" name="Default Changelist" comment="File Upload Database">
+      <change afterPath="$PROJECT_DIR$/views/authors/edit.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/authors/show.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/book.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/book.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/author.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/author.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/bookCovers/00fb42a511dd9d18b7d4ecbac4592b3f" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/bookCovers/40392dcaf174eead82036d74f9c3c77e" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/bookCovers/4264607e000a2f97725812af974ba208" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/bookCovers/6c89d2e9a9883dce87963e113ac64e71" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/bookCovers/7173ebb7d3be44cb9d8e6ed9a2ea4d7a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/bookCovers/836721772c4aa2c82aae5be22a6c0b5b" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/bookCovers/f1f2593e969436299001d67407c6e037" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/books.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/books.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/books/_form_fields.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/books/_form_fields.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/books/new.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/books/new.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/layout.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/layout.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/authors.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/authors/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/authors/index.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +88,8 @@
       <workItem from="1606929181304" duration="3663000" />
       <workItem from="1607005358646" duration="5234000" />
       <workItem from="1607098022216" duration="9624000" />
-      <workItem from="1607267532804" duration="4921000" />
+      <workItem from="1607267532804" duration="5196000" />
+      <workItem from="1607439168179" duration="978000" />
     </task>
     <task id="LOCAL-00001" summary="done">
       <created>1606928024980</created>
@@ -127,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607107859717</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="File Upload Database">
+      <created>1607272901980</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1607272901980</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,7 +150,8 @@
     <MESSAGE value="Initial Author Router" />
     <MESSAGE value="ignore" />
     <MESSAGE value=" Book create Merge remote-tracking branch 'origin/master'" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Book create Merge remote-tracking branch 'origin/master'" />
+    <MESSAGE value="File Upload Database" />
+    <option name="LAST_COMMIT_MESSAGE" value="File Upload Database" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
