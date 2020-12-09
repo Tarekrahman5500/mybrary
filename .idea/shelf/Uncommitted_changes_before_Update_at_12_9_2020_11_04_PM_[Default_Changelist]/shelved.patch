@@ -1,0 +1,347 @@
+Index: views/books/_form_fields.ejs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div>\r\n  <label>Title</label>\r\n  <label>\r\n    <input type=\"text\" name=\"title\" value=\"<%= book.title %>\">\r\n  </label>\r\n</div>\r\n<div>\r\n  <label>Author</label>\r\n  <label>\r\n    <select name=\"author\">\r\n      <% authors.forEach(author => { %>\r\n        <% if (author.id === book.author) { %>\r\n        <option selected label=\"<%= author.name %>\" value=\"<%= author.id %>\">\r\n          <% } else { %>\r\n      <option label=\"<%= author.name %>\" value=\"<%= author.id %>\">\r\n        <% } %>\r\n        <% }) %>\r\n    </select>\r\n  </label>\r\n</div>\r\n<div>\r\n  <label>Publish Date</label>\r\n  <label>\r\n    <input type=\"date\" name=\"publishDate\"\r\n           value=\"<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>\">\r\n  </label>\r\n</div>\r\n<div>\r\n  <label>Page Count</label>\r\n  <label>\r\n    <input type=\"number\" name=\"pageCount\" min=\"1\" value=\"<%= book.pageCount %>\">\r\n  </label>\r\n</div>\r\n\r\n<div>\r\n  <label>Cover</label>\r\n  <input type=\"file\" name=\"cover\" class=\"filepond\">\r\n</div>\r\n<div>\r\n  <label>Description</label>\r\n  <label>\r\n    <textarea name=\"description\"><%= book.description %></textarea>\r\n  </label>\r\n</div>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/views/books/_form_fields.ejs b/views/books/_form_fields.ejs
+--- a/views/books/_form_fields.ejs	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ b/views/books/_form_fields.ejs	(date 1553323750000)
+@@ -1,44 +1,34 @@
+ <div>
+   <label>Title</label>
+-  <label>
+-    <input type="text" name="title" value="<%= book.title %>">
+-  </label>
++  <input type="text" name="title" value="<%= book.title %>">
+ </div>
+ <div>
+   <label>Author</label>
+-  <label>
+-    <select name="author">
+-      <% authors.forEach(author => { %>
+-        <% if (author.id === book.author) { %>
+-        <option selected label="<%= author.name %>" value="<%= author.id %>">
+-          <% } else { %>
++  <select name="author">
++  <% authors.forEach(author => { %>
++    <% if (author.id === book.author) { %>
++      <option selected label="<%= author.name %>" value="<%= author.id %>">
++    <% } else { %>
+       <option label="<%= author.name %>" value="<%= author.id %>">
+-        <% } %>
+-        <% }) %>
+-    </select>
+-  </label>
++    <% } %>
++  <% }) %>
++  </select>
+ </div>
+ <div>
+   <label>Publish Date</label>
+-  <label>
+-    <input type="date" name="publishDate"
+-           value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">
+-  </label>
++  <input type="date" name="publishDate"
++        value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">
+ </div>
+ <div>
+   <label>Page Count</label>
+-  <label>
+-    <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
+-  </label>
++  <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
++</div>
+ </div>
+-
+ <div>
+   <label>Cover</label>
+   <input type="file" name="cover" class="filepond">
+ </div>
+ <div>
+   <label>Description</label>
+-  <label>
+-    <textarea name="description"><%= book.description %></textarea>
+-  </label>
+-</div>
++  <textarea name="description"><%= book.description %></textarea>
++</div>
+\ No newline at end of file
+Index: views/authors/index.ejs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><h2>Search Authors</h2>\r\n<form action=\"/authors\" method=\"GET\">\r\n  <label>Name</label>\r\n  <input type=\"text\" name=\"name\" value=\"<%= searchOptions.name %>\">\r\n  <button type=\"submit\">Search</button>\r\n</form>\r\n<br>\r\n<% authors.forEach(author => { %>\r\n  <div><%= author.name %></div>\r\n  <a href=\"/authors/<%= author.id %>\">View</a>\r\n  <a href=\"/authors/<%= author.id %>/edit\">Edit</a>\r\n  <%- include('../partials/deleteForm',\r\n  { url: `/authors/${author.id}` }) %>\r\n<% }) %>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/views/authors/index.ejs b/views/authors/index.ejs
+--- a/views/authors/index.ejs	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ b/views/authors/index.ejs	(date 1553323750000)
+@@ -10,5 +10,5 @@
+   <a href="/authors/<%= author.id %>">View</a>
+   <a href="/authors/<%= author.id %>/edit">Edit</a>
+   <%- include('../partials/deleteForm',
+-  { url: `/authors/${author.id}` }) %>
+-<% }) %>
++              { url: `/authors/${author.id}` }) %>
++<% }) %>
+\ No newline at end of file
+Index: models/author.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const mongoose = require('mongoose')\r\nconst Book = require('./book');\r\n\r\nconst authorSchema = new mongoose.Schema({\r\n  name: {\r\n    type: String,\r\n    required: true\r\n  }\r\n});\r\n\r\nauthorSchema.pre('remove', function(next) {\r\n  Book.find({ author: this.id }, (err, books) => {\r\n    if (err) {\r\n      next(err)\r\n    } else if (books.length > 0) {\r\n      next(new Error('This author has books still'))\r\n    } else {\r\n      next()\r\n    }\r\n  })\r\n});\r\n\r\nmodule.exports = mongoose.model('Author', authorSchema)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/models/author.js b/models/author.js
+--- a/models/author.js	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ b/models/author.js	(date 1607532721219)
+@@ -1,4 +1,4 @@
+-const mongoose = require('mongoose')
++const mongoose = require('mongoose');
+ const Book = require('./book');
+ 
+ const authorSchema = new mongoose.Schema({
+@@ -6,7 +6,7 @@
+     type: String,
+     required: true
+   }
+-});
++})
+ 
+ authorSchema.pre('remove', function(next) {
+   Book.find({ author: this.id }, (err, books) => {
+@@ -20,4 +20,4 @@
+   })
+ });
+ 
+-module.exports = mongoose.model('Author', authorSchema)
++module.exports = mongoose.model('Author', authorSchema);
+Index: server.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>if (process.env.NODE_ENV !== 'production') {\r\n    require('dotenv').config();\r\n}\r\nconst express = require('express');\r\nconst app = express();\r\nconst expressLayouts = require('express-ejs-layouts');\r\nconst bodyParser = require('body-parser');\r\nconst methodOverride = require('method-override');\r\n\r\nconst indexRouter = require('./routes/index');\r\nconst authorRouter = require('./routes/authors');\r\nconst bookRouter = require('./routes/books');\r\n\r\napp.set('view engine', 'ejs');\r\napp.set('views', __dirname + '/views');\r\napp.set('layout', 'layouts/layout');\r\napp.use(expressLayouts);\r\napp.use(methodOverride('_method'));\r\napp.use(express.static('public'));\r\napp.use(bodyParser.urlencoded({ limit: '10mb', extended: false}))\r\n\r\nconst mongoose = require('mongoose');\r\nmongoose.connect(process.env.DATBASE_URL, {\r\n    useUnifiedTopology: true,\r\n    useNewUrlParser: true\r\n})\r\n\r\nconst db = mongoose.connection;\r\ndb.on('error', error => console.error(error));\r\ndb.once('open', () => console.log(\"connected to Database\"));\r\n\r\napp.use('/',indexRouter);\r\napp.use('/authors',authorRouter);\r\napp.use('/books',bookRouter);\r\n\r\napp.listen(process.env.PORT || 3000);\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/server.js b/server.js
+--- a/server.js	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ b/server.js	(date 1607531979014)
+@@ -22,7 +22,8 @@
+ const mongoose = require('mongoose');
+ mongoose.connect(process.env.DATBASE_URL, {
+     useUnifiedTopology: true,
+-    useNewUrlParser: true
++    useNewUrlParser: true,
++
+ })
+ 
+ const db = mongoose.connection;
+Index: public/javascprits/fileUpload.js
+===================================================================
+diff --git a/public/javascprits/fileUpload.js b/public/javascprits/fileUpload.js
+deleted file mode 100644
+--- a/public/javascprits/fileUpload.js	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ /dev/null	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
+@@ -1,11 +0,0 @@
+-FilePond.registerPlugin(
+-    FilePondPluginImagePreview,
+-    FilePondPluginImageResize,
+-    FilePondPluginFileEncode,
+-)
+-FilePond.setOptions({
+-    stylePanelAspectRatio: 150 / 100,
+-    imageResizeTargetWidth: 100,
+-    imageResizeTargetHeight: 150
+-})
+-FilePond.parse(document.body);
+Index: public/javascripts/fileUpload.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/public/javascripts/fileUpload.js b/public/javascripts/fileUpload.js
+new file mode 100644
+--- /dev/null	(date 1553323750000)
++++ b/public/javascripts/fileUpload.js	(date 1553323750000)
+@@ -0,0 +1,13 @@
++FilePond.registerPlugin(
++  FilePondPluginImagePreview,
++  FilePondPluginImageResize,
++  FilePondPluginFileEncode,
++)
++
++FilePond.setOptions({
++  stylePanelAspectRatio: 150 / 100,
++  imageResizeTargetWidth: 100,
++  imageResizeTargetHeight: 150
++})
++
++FilePond.parse(document.body);
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ee227925-2a0e-4bba-a251-85fa854d744b\" name=\"Default Changelist\" comment=\"File Upload Database\">\r\n      <change afterPath=\"$PROJECT_DIR$/views/authors/edit.ejs\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/views/authors/show.ejs\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/models/author.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/models/author.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/package-lock.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/package-lock.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/package.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/package.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/routes/authors.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/routes/authors.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/server.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/server.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/views/authors/index.ejs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/views/authors/index.ejs\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"tsconfig.json\" />\r\n        <option value=\"HTML File\" />\r\n        <option value=\"JavaScript File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1l6hM6SMFvrZF8PYj5zI0MciDku\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\r\n    <property name=\"ASKED_SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"DefaultHtmlFileTemplate\" value=\"HTML File\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"javascript.nodejs.core.library.configured.version\" value=\"12.19.0\" />\r\n    <property name=\"javascript.nodejs.core.library.typings.version\" value=\"12.19.0\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/views/books\" />\r\n    <property name=\"nodejs_interpreter_path\" value=\"node\" />\r\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.pluginManager\" />\r\n    <property name=\"vue.rearranger.settings.migration\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\tarek\\WebstormProjects\\server\\views\\books\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"start\" type=\"js.build_tools.npm\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <package-json value=\"$PROJECT_DIR$/package.json\" />\r\n      <command value=\"run\" />\r\n      <scripts>\r\n        <script value=\"start\" />\r\n      </scripts>\r\n      <node-interpreter value=\"project\" />\r\n      <envs />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"npm.start\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ee227925-2a0e-4bba-a251-85fa854d744b\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1606923397048</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1606923397048</updated>\r\n      <workItem from=\"1606923398151\" duration=\"2474000\" />\r\n      <workItem from=\"1606925896597\" duration=\"3249000\" />\r\n      <workItem from=\"1606929181304\" duration=\"3663000\" />\r\n      <workItem from=\"1607005358646\" duration=\"5234000\" />\r\n      <workItem from=\"1607098022216\" duration=\"9624000\" />\r\n      <workItem from=\"1607267532804\" duration=\"5196000\" />\r\n      <workItem from=\"1607439168179\" duration=\"978000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"done\">\r\n      <created>1606928024980</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606928024980</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"ignore\">\r\n      <created>1606928141995</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606928141995</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"ignore\">\r\n      <created>1607009731429</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1607009731429</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\" Book create Merge remote-tracking branch 'origin/master'\">\r\n      <created>1607107859717</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1607107859717</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"File Upload Database\">\r\n      <created>1607272901980</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1607272901980</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"6\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"done\" />\r\n    <MESSAGE value=\"Initial Author Router\" />\r\n    <MESSAGE value=\"ignore\" />\r\n    <MESSAGE value=\" Book create Merge remote-tracking branch 'origin/master'\" />\r\n    <MESSAGE value=\"File Upload Database\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"File Upload Database\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ b/.idea/workspace.xml	(date 1607533302361)
+@@ -1,16 +1,27 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="ee227925-2a0e-4bba-a251-85fa854d744b" name="Default Changelist" comment="File Upload Database">
+-      <change afterPath="$PROJECT_DIR$/views/authors/edit.ejs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/views/authors/show.ejs" afterDir="false" />
++    <list default="true" id="ee227925-2a0e-4bba-a251-85fa854d744b" name="Default Changelist" comment="Finished Author Routes">
++      <change afterPath="$PROJECT_DIR$/public/javascripts/fileUpload.js" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/views/books/edit.ejs" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/views/books/show.ejs" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/models/author.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/author.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/models/book.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/book.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/public/javascprits/fileUpload.js" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/routes/authors.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authors.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/routes/books.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/books.js" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/authors/_form_fields.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/authors/_form_fields.ejs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/authors/edit.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/authors/edit.ejs" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/views/authors/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/authors/index.ejs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/authors/show.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/authors/show.ejs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/books/_form_fields.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/books/_form_fields.ejs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/books/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/books/index.ejs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/books/new.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/books/new.ejs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/layouts/layout.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/layout.ejs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/views/partials/deleteForm.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/deleteForm.ejs" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -89,7 +100,8 @@
+       <workItem from="1607005358646" duration="5234000" />
+       <workItem from="1607098022216" duration="9624000" />
+       <workItem from="1607267532804" duration="5196000" />
+-      <workItem from="1607439168179" duration="978000" />
++      <workItem from="1607439168179" duration="1291000" />
++      <workItem from="1607527896131" duration="5348000" />
+     </task>
+     <task id="LOCAL-00001" summary="done">
+       <created>1606928024980</created>
+@@ -126,7 +138,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1607272901980</updated>
+     </task>
+-    <option name="localTasksCounter" value="6" />
++    <task id="LOCAL-00006" summary="Finished Author Routes">
++      <created>1607440383492</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1607440383492</updated>
++    </task>
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -151,7 +170,9 @@
+     <MESSAGE value="ignore" />
+     <MESSAGE value=" Book create Merge remote-tracking branch 'origin/master'" />
+     <MESSAGE value="File Upload Database" />
+-    <option name="LAST_COMMIT_MESSAGE" value="File Upload Database" />
++    <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
++    <MESSAGE value="Finished Author Routes" />
++    <option name="LAST_COMMIT_MESSAGE" value="Finished Author Routes" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: views/layouts/layout.ejs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n  <meta charset=\"UTF-8\">\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n  <link href=\"https://unpkg.com/filepond/dist/filepond.css\" rel=\"stylesheet\">\r\n  <link href=\"https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css\" rel=\"stylesheet\">\r\n  <script defer src=\"https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js\"></script>\r\n  <script defer src=\"https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js\"></script>\r\n  <script defer src=\"https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js\"></script>\r\n  <script defer src=\"https://unpkg.com/filepond/dist/filepond.js\"></script>\r\n  <script defer src=\"/javascprits/fileUpload.js\"></script>\r\n  <title>Mybrary</title>\r\n</head>\r\n<body>\r\n<%- include('../partials/header.ejs') %>\r\n<%- include('../partials/errorMessage.ejs') %>\r\n<%- body %>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/views/layouts/layout.ejs b/views/layouts/layout.ejs
+--- a/views/layouts/layout.ejs	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ b/views/layouts/layout.ejs	(date 1553323750000)
+@@ -10,12 +10,12 @@
+   <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+   <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+   <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+-  <script defer src="/javascprits/fileUpload.js"></script>
++  <script defer src="/javascripts/fileUpload.js"></script>
+   <title>Mybrary</title>
+ </head>
+ <body>
+-<%- include('../partials/header.ejs') %>
+-<%- include('../partials/errorMessage.ejs') %>
+-<%- body %>
++  <%- include('../partials/header.ejs') %>
++  <%- include('../partials/errorMessage.ejs') %>
++  <%- body %>
+ </body>
+-</html>
++</html>
+\ No newline at end of file
+Index: views/books/show.ejs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/views/books/show.ejs b/views/books/show.ejs
+new file mode 100644
+--- /dev/null	(date 1553323750000)
++++ b/views/books/show.ejs	(date 1553323750000)
+@@ -0,0 +1,10 @@
++<h2><%= book.title %></h2>
++<img width="100" height="150" src="<%= book.coverImagePath %>">
++<div>Author: <%= book.author.name %></div>
++<div>Publish Date: <%= book.publishDate.toDateString() %></div>
++<div>Page Count: <%= book.pageCount %></div>
++<div>Description: <%= book.description %></div>
++
++<a href="/books/<%= book.id %>/edit">Edit</a>
++<%- include('../partials/deleteForm', { url: `/books/${book.id}` }) %>
++<a href="/authors/<%= book.author.id %>">View Author</a>
+\ No newline at end of file
+Index: views/authors/_form_fields.ejs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><label>Name</label>\r\n<label>\r\n    <input type=\"text\" name=\"name\" value=\"<%= author.name %>\">\r\n</label>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/views/authors/_form_fields.ejs b/views/authors/_form_fields.ejs
+--- a/views/authors/_form_fields.ejs	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ b/views/authors/_form_fields.ejs	(date 1553323750000)
+@@ -1,4 +1,2 @@
+ <label>Name</label>
+-<label>
+-    <input type="text" name="name" value="<%= author.name %>">
+-</label>
++<input type="text" name="name" value="<%= author.name %>">
+\ No newline at end of file
+Index: views/partials/deleteForm.ejs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><form method=\"POST\" action=\"<%= url %>?_method=DELETE\">\r\n    <button type=\"submit\">Delete</button>\r\n</form>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/views/partials/deleteForm.ejs b/views/partials/deleteForm.ejs
+--- a/views/partials/deleteForm.ejs	(revision 3f9c06489d1d2a12b96a17bdd07d7e91288c11f3)
++++ b/views/partials/deleteForm.ejs	(date 1553323750000)
+@@ -1,3 +1,3 @@
+ <form method="POST" action="<%= url %>?_method=DELETE">
+-    <button type="submit">Delete</button>
+-</form>
++  <button type="submit">Delete</button>
++</form>
+\ No newline at end of file
